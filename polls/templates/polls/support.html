@@ -1,0 +1,47 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>luch</title>
+
+<!--link-->
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<!--script-->
+<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+
+
+</head>
+<body>
+
+
+<div class="container text-center">
+
+        {% for contact in contacts %}
+            <h6>Имя пользователя</h6>
+            <h4><a href="?page/{{ contact.id }}/">{{ contact.unique }}</a></h4>
+
+    {% endfor %}
+    <ul class="pagination">
+
+            {% if contacts.has_previous %}
+                <li><a href="?page=1">&laquo; first</a></li>
+               <li> <a href="?page={{ contacts.previous_page_number }}">previous &raquo;</a></li>
+            {% endif %}
+             {% for page in contacts.paginator.page_range %}
+                        {% if page == contacts.unique %}
+                            <li><a href="?page={{ page }}">{{ page }}</a></li>
+                        {% else %}
+                            <li><a href="?page={{ page }}">{{ page }}</a></li>
+                        {% endif %}
+            {% endfor %}
+            {% if contacts.has_next %}
+                <li><a href="?page={{ contacts.next_page_number }}">next &raquo;</a></li>
+                <li><a href="?page={{ contacts.paginator.num_pages }}">last &raquo;</a></li>
+            {% endif %}
+
+    </ul>
+</body>
