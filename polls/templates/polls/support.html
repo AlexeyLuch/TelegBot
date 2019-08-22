@@ -7,41 +7,60 @@
 
 <!--link-->
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<!--script-->
-<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
 
+<!--script-->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 
 </head>
 <body>
 
 
-<div class="container text-center">
 
-        {% for contact in contacts %}
-            <h6>Имя пользователя</h6>
-            <h4><a href="?page/{{ contact.id }}/">{{ contact.unique }}</a></h4>
-
-    {% endfor %}
-    <ul class="pagination">
-
-            {% if contacts.has_previous %}
-                <li><a href="?page=1">&laquo; first</a></li>
-               <li> <a href="?page={{ contacts.previous_page_number }}">previous &raquo;</a></li>
-            {% endif %}
-             {% for page in contacts.paginator.page_range %}
-                        {% if page == contacts.unique %}
-                            <li><a href="?page={{ page }}">{{ page }}</a></li>
-                        {% else %}
-                            <li><a href="?page={{ page }}">{{ page }}</a></li>
-                        {% endif %}
+    <div class="container">
+          <table class="table">
+                <thead>
+                  <tr>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                  </tr>
+                </thead>
+                {% for contact in contacts %}
+                <tbody>
+                  <tr>
+                    <td>Имя пользователя</td>
+                    <td>{{ contact.unique }}</td>
+                  </tr>
+                </tbody>
             {% endfor %}
-            {% if contacts.has_next %}
-                <li><a href="?page={{ contacts.next_page_number }}">next &raquo;</a></li>
-                <li><a href="?page={{ contacts.paginator.num_pages }}">last &raquo;</a></li>
-            {% endif %}
+        </table>
+    </div>
+        <ul class="pagination">
 
-    </ul>
+                {% if contacts.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page=1">&laquo; first</a></li>
+                   <li class="page-item "> <a class="page-link" href="?page={{ contacts.previous_page_number }}">previous &raquo;</a></li>
+                {% endif %}
+                 {% for page in contacts.paginator.page_range %}
+                    {% if page == contacts.unique %}
+                        <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+                    {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if contacts.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ contacts.next_page_number }}">next &raquo;</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ contacts.paginator.num_pages }}">last &raquo;</a></li>
+                {% endif %}
+
+        </ul>
+
 </body>
+
+<style>
+    .pagination{
+        margin-left: 650px;
+}
+</style>

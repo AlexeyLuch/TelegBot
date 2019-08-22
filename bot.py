@@ -5,10 +5,10 @@ import youtube
 import telebot
 import sqlite3
 from telebot import types
+import datetime
 
 
-
-bot = telebot.TeleBot('')
+bot = telebot.TeleBot('820408109:AAGJlhVTqouPR0QWPVtRax-ntTY11ji51E4')
 
 keyboard1 = telebot.types.ReplyKeyboardMarkup()
 keyboard = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
@@ -25,13 +25,15 @@ def start_message(message):
     bot.send_message(message.chat.id, 'Добрый день ' + str(message.from_user.username) + ' видео на какую тему желаете посмотреть?', reply_markup=keyboard)
     cc1 = message.from_user.username
     db = sqlite3.connect('db.sqlite3')
-    cursor = db.cursor()
+    cur = db.cursor()
+    now = datetime.datetime.now()
+    day_month = now.day,now.month
     # query = "SELECT * FROM polls_user_name WHERE unique = %s"
     # query = ("select count(*) as count FROM polls_user_name WHERE unique = '%s' "%(cc1))
     # query = "INSERT INTO polls_user_name unique VALUES %s"
-    c = "select * from polls_user_name"
-    cursor.execute(c)
-    status = cursor.fetchone()
+    cur.execute('SELECT * FROM polls_user_name')
+    # cur.execute('INSERT INTO polls_user_name ( unique, pub_date) VALUES ( "%s","%s", )' % (cc1,day_month))
+    status = cur.fetchone()
     db.commit()
     print(status)
 
