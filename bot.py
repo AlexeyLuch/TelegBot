@@ -1,4 +1,4 @@
-"""820408109:AAGJlhVTqouPR0QWPVtRax-ntTY11ji51E4"""
+
 import youtube
 
 """ https://github.com/eternnoir/pyTelegramBotAPI/blob/master/README.md """
@@ -8,7 +8,7 @@ from telebot import types
 
 
 
-bot = telebot.TeleBot('820408109:AAGJlhVTqouPR0QWPVtRax-ntTY11ji51E4')
+bot = telebot.TeleBot('')
 
 keyboard1 = telebot.types.ReplyKeyboardMarkup()
 keyboard = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
