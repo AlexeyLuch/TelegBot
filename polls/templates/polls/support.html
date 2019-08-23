@@ -24,14 +24,14 @@
                 <thead>
                   <tr>
                     <th>Firstname</th>
-                    <th>Lastname</th>
+                    <th>Data</th>
                   </tr>
                 </thead>
                 {% for contact in contacts %}
                 <tbody>
                   <tr>
-                    <td>Имя пользователя</td>
                     <td>{{ contact.unique }}</td>
+                    <td>{{ contact.pub_date }}</td>
                   </tr>
                 </tbody>
             {% endfor %}
